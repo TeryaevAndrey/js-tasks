@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="clock">
+      <span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec"
+        >ss</span
+      >
+
+      <button class="start" onClick="clockStart()">start</button>
+      <button class="stop" onClick="clockStop()">Stop</button>
+    </div>
+
+    <script>
+      const update = () => {
+        const clock = document.getElementById("clock");
+        const date = new Date();
+        let hours = date.getHours();
+
+        if (hours < 10) {
+          hours = "0" + hours;
+        }
+
+        clock.children[0].innerHTML = hours;
+
+        let min = date.getMinutes();
+
+        if (min < 10) {
+          min = "0" + min;
+        }
+
+        clock.children[1].innerHTML = min;
+
+        let sec = date.getSeconds();
+
+        if (sec < 10) {
+          sec = "0" + sec;
+        }
+
+        clock.children[2].innerHTML = sec;
+      };
+
+      let timerId;
+
+      const clockStart = () => {
+        timerId = setInterval(update, 1000);
+        update();
+      };
+
+      const clockStop = () => {
+        clearInterval(timerId);
+        timerId = null;
+        document.querySelector(".hour").innerHTML = "hh";
+        document.querySelector(".min").innerHTML = "mm";
+        document.querySelector(".sec").innerHTML = "ss";
+      };
+    </script>
+  </body>
+</html>
